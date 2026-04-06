@@ -1,0 +1,11 @@
+# Local overrides for values typically dynamic
+# Apply this after the main configmap for local testing overrides
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: route-management-env-config
+data:
+  SPRING_PROFILES_ACTIVE: "dev"
+  POSTGRES_HOST: "postgres"
+  REDIS_HOST: "redis"
+  KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"
