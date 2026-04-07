@@ -1,16 +1,27 @@
 spring:
   datasource:
-    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT:5432}/${POSTGRES_DB:gtbs_route_management}?sslmode=require
-    username: ${POSTGRES_USER}
-    password: ${POSTGRES_PASSWORD}
-    
+    url: ${ROUTE_DATASOURCE_URL}
+    username: ${ROUTE_DATASOURCE_USERNAME}
+    password: ${ROUTE_DATASOURCE_PASSWORD}
+    hikari:
+      maximum-pool-size: ${SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE:3}
+      minimum-idle: ${SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE:1}
+      connection-timeout: ${SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT:30000}
+      idle-timeout: ${SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT:120000}
+      max-lifetime: ${SPRING_DATASOURCE_HIKARI_MAX_LIFETIME:1800000}
+
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+
   data:
     redis:
+      host: ${SPRING_DATA_REDIS_HOST}
+      port: ${SPRING_DATA_REDIS_PORT}
+      password: ${SPRING_DATA_REDIS_PASSWORD}
       ssl:
         enabled: true
-        
+
   kafka:
-    properties:
-      security.protocol: SASL_SSL
-      sasl.mechanism: PLAIN
-      sasl.jaas.config: ${KAFKA_JAAS_CONFIG}
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS}

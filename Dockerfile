@@ -42,9 +42,9 @@ COPY --from=build /workspace/target/extracted/application/           ./
 
 # Health check — Spring Actuator endpoint
 HEALTHCHECK --interval=30s --timeout=5s --start-period=45s --retries=3 \
-  CMD wget -qO- http://localhost:8080/actuator/health || exit 1
+  CMD wget -qO- http://localhost:8082/actuator/health || exit 1
 
-EXPOSE 8080
+EXPOSE 8082
 
 # Container-aware JVM flags:
 #   UseContainerSupport — honour cgroup memory limits
