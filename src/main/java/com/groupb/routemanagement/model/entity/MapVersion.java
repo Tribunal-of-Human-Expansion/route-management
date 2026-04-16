@@ -21,7 +21,7 @@ public class MapVersion {
     private String description;
 
     @Column(name = "is_current", nullable = false)
-    private boolean isCurrent = false;
+    private boolean current = false;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
