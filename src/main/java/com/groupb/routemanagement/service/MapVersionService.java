@@ -16,14 +16,14 @@ public class MapVersionService {
     private final MapVersionRepository mapVersionRepository;
 
     public String getCurrentMapVersion() {
-        return mapVersionRepository.findByIsCurrentTrue()
+        return mapVersionRepository.findByCurrentTrue()
                 .map(MapVersion::getVersion)
                 .orElse("v2025.04"); // Default fallback
     }
 
     @Transactional
     public String bumpMapVersion(String description) {
-        mapVersionRepository.findByIsCurrentTrue().ifPresent(v -> {
+        mapVersionRepository.findByCurrentTrue().ifPresent(v -> {
             v.setCurrent(false);
             mapVersionRepository.save(v);
         });
