@@ -75,11 +75,6 @@ spec:
                 secretKeyRef:
                   name: route-management-kv-synced
                   key: SPRING_DATA_REDIS_PASSWORD
-            - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
-              valueFrom:
-                secretKeyRef:
-                  name: route-management-kv-synced
-                  key: SPRING_KAFKA_BOOTSTRAP_SERVERS
           resources:
             requests:
               cpu: "250m"

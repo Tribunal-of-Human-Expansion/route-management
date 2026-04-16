@@ -8,4 +8,3 @@ data:
   SPRING_PROFILES_ACTIVE: "dev"
   POSTGRES_HOST: "postgres"
   REDIS_HOST: "redis"
-  KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"
