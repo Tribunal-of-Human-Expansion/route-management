@@ -25,7 +25,6 @@ Create these secrets in `ds-gtbs-kv-prod`:
 - `spring-data-redis-host`
 - `spring-data-redis-port`
 - `spring-data-redis-password`
-- `spring-kafka-bootstrap-servers`
 
 ## Deploy
 
