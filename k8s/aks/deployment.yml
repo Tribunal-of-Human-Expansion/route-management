@@ -36,7 +36,7 @@ spec:
           image: ghcr.io/eshandas5/route-management:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 8082
+            - containerPort: 8083
           volumeMounts:
             - name: keyvault-secrets
               mountPath: /mnt/secrets
@@ -85,13 +85,13 @@ spec:
           livenessProbe:
             httpGet:
               path: /actuator/health
-              port: 8082
+              port: 8083
             initialDelaySeconds: 45
             periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /actuator/health
-              port: 8082
+              port: 8083
             initialDelaySeconds: 30
             periodSeconds: 10
 ---
@@ -106,5 +106,5 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 8082
+      targetPort: 8083
   type: ClusterIP
