@@ -34,11 +34,6 @@ spec:
                 secretKeyRef:
                   name: redis-credentials
                   key: primary_key
-            - name: KAFKA_JAAS_CONFIG
-              valueFrom:
-                secretKeyRef:
-                  name: kafka-credentials
-                  key: connection_string
           livenessProbe:
             httpGet:
               path: /actuator/health/liveness

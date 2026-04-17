@@ -1,6 +1,5 @@
 package com.groupb.routemanagement.service;
 
-import com.groupb.routemanagement.event.RoutePolicyEventPublisher;
 import com.groupb.routemanagement.model.dto.CapacityPolicyDto;
 import com.groupb.routemanagement.model.dto.ClosureRequest;
 import com.groupb.routemanagement.model.entity.SegmentCapacityPolicy;
@@ -12,8 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class CapacityPolicyService {
@@ -22,7 +19,6 @@ public class CapacityPolicyService {
     private final TemporaryClosureRepository temporaryClosureRepository;
     private final SegmentRepository segmentRepository;
     private final MapVersionService mapVersionService;
-    private final RoutePolicyEventPublisher eventPublisher;
 
     @Transactional
     public SegmentCapacityPolicy updateCapacityPolicy(String segmentId, CapacityPolicyDto dto) {
@@ -44,8 +40,6 @@ public class CapacityPolicyService {
 
         policy = capacityPolicyRepository.save(policy);
 
-        eventPublisher.publishPolicyUpdate(newVersion, List.of(segmentId));
-
         return policy;
     }
 
@@ -66,8 +60,6 @@ public class CapacityPolicyService {
 
         closure = temporaryClosureRepository.save(closure);
 
-        eventPublisher.publishPolicyUpdate(newVersion, List.of(segmentId));
-
         return closure;
     }
 
@@ -79,7 +71,6 @@ public class CapacityPolicyService {
         String segmentId = closure.getSegmentId();
         temporaryClosureRepository.delete(closure);
 
-        String newVersion = mapVersionService.bumpMapVersion("Closure lifted from " + segmentId);
-        eventPublisher.publishPolicyUpdate(newVersion, List.of(segmentId));
+        mapVersionService.bumpMapVersion("Closure lifted from " + segmentId);
     }
 }
