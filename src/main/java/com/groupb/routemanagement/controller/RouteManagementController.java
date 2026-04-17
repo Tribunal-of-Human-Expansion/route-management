@@ -94,7 +94,7 @@ public class RouteManagementController {
 
     @GetMapping("/map-version/current")
     public ResponseEntity<MapVersion> getCurrentMapVersion() {
-        return mapVersionRepository.findByIsCurrentTrue()
+        return mapVersionRepository.findByCurrentTrue()
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }

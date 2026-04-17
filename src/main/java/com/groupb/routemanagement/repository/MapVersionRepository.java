@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface MapVersionRepository extends JpaRepository<MapVersion, String> {
-    Optional<MapVersion> findByIsCurrentTrue();
+    Optional<MapVersion> findByCurrentTrue();
 }
